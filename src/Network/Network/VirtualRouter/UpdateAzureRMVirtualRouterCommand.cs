@@ -80,8 +80,6 @@ namespace Microsoft.Azure.Commands.Network
                 this.RouterName = resourceInfo.ResourceName;
             }
 
-            string ipConfigName = "ipconfig1";
-
             var virtualHub = this.NetworkClient.NetworkManagementClient.VirtualHubs.Get(ResourceGroupName, RouterName);
             virtualHub.AllowBranchToBranchTraffic = this.AllowBranchToBranchTraffic.IsPresent;
             this.NetworkClient.NetworkManagementClient.VirtualHubs.CreateOrUpdate(this.ResourceGroupName, this.RouterName, virtualHub);
@@ -90,7 +88,7 @@ namespace Microsoft.Azure.Commands.Network
             psVirtualHub.ResourceGroupName = this.ResourceGroupName;
             psVirtualHub.Tag = TagsConversionHelper.CreateTagHashtable(virtualHub.Tags);
             AddBgpConnectionsToPSVirtualHub(virtualHub, psVirtualHub, ResourceGroupName, RouterName);
-            AddIpConfigurtaionToPSVirtualHub(psVirtualHub, this.ResourceGroupName, RouterName, ipConfigName);
+            AddIpConfigurtaionToPSVirtualHub(psVirtualHub, this.ResourceGroupName, RouterName);
 
             var psVirtualRouter = new PSVirtualRouter(psVirtualHub);
             psVirtualRouter.Tag = TagsConversionHelper.CreateTagHashtable(virtualHub.Tags);

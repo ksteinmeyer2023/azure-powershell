@@ -34,8 +34,10 @@ namespace Microsoft.Azure.Commands.Network
                 ipConfigModel = ipConfigList[0];
             }
             var ipconfig = NetworkResourceManagerProfile.Mapper.Map<CNM.PSHubIpConfiguration>(ipConfigModel);
-            virtualHubModel.IpConfigurations = new List<CNM.PSHubIpConfiguration>();
-            virtualHubModel.IpConfigurations.Add(ipconfig);
+            virtualHubModel.IpConfigurations = new List<CNM.PSHubIpConfiguration>
+            {
+                ipconfig
+            };
         }
     }
 }

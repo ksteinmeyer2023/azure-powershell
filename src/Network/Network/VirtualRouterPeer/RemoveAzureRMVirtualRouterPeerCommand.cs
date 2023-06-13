@@ -106,15 +106,13 @@ namespace Microsoft.Azure.Commands.Network
                 PeerName,
                 () =>
                 {
-                    string ipConfigName = "ipconfig1";
-
                     this.NetworkClient.NetworkManagementClient.VirtualHubBgpConnection.Delete(ResourceGroupName, VirtualRouterName, PeerName);
                     var virtualHub = this.NetworkClient.NetworkManagementClient.VirtualHubs.Get(ResourceGroupName, VirtualRouterName);
                     var virtualHubModel = NetworkResourceManagerProfile.Mapper.Map<CNM.PSVirtualHub>(virtualHub);
                     virtualHubModel.ResourceGroupName = this.ResourceGroupName;
                     virtualHubModel.Tag = TagsConversionHelper.CreateTagHashtable(virtualHub.Tags);
                     AddBgpConnectionsToPSVirtualHub(virtualHub, virtualHubModel, ResourceGroupName, this.VirtualRouterName);
-                    AddIpConfigurtaionToPSVirtualHub(virtualHubModel, this.ResourceGroupName, this.VirtualRouterName, ipConfigName);
+                    AddIpConfigurtaionToPSVirtualHub(virtualHubModel, this.ResourceGroupName, this.VirtualRouterName);
 
                     var vVirtualRouterModel = new PSVirtualRouter(virtualHubModel);
                     vVirtualRouterModel.Tag = TagsConversionHelper.CreateTagHashtable(virtualHub.Tags);

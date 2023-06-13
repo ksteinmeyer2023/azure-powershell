@@ -135,7 +135,7 @@ namespace Microsoft.Azure.Commands.Network
 
                     virtualHub = NetworkResourceManagerProfile.Mapper.Map<PSVirtualHub>(virtualHubModel);
                     virtualHub.ResourceGroupName = this.ResourceGroupName;
-                    AddIpConfigurtaionToPSVirtualHub(virtualHub, this.ResourceGroupName, this.Name, ipConfigName);
+                    AddIpConfigurtaionToPSVirtualHub(virtualHub, this.ResourceGroupName, this.Name);
                    
                     var virtualRouter = new PSVirtualRouter(virtualHub);
                     virtualRouter.Tag = TagsConversionHelper.CreateTagHashtable(virtualHubModel.Tags);
